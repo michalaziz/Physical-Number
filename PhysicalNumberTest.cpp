@@ -62,18 +62,19 @@ int main()
         .CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
 
         // YOUR TESTS - INSERT AS MANY AS YOU WANT
-        .CHECK_OUTPUT(l1+l2, "8[km]")
-        .CHECK_OUTPUT(l1+l2, "8000[m]")
-        .CHECK_OUTPUT(l1+l2, "800000[cm]")
-        .CHECK_OUTPUT(l1+l3, "4.00004[km]")
-        .CHECK_OUTPUT(l1+l3, "4000.04[m]")
-        .CHECK_OUTPUT(l1+l3, "400004[cm]")
-        .CHECK_OUTPUT(l2+l3, "4.00004[km]")
-        .CHECK_OUTPUT(l2+l3, "4000.04[m]")
-        .CHECK_OUTPUT(l2+l3, "400004[cm]")
-        .CHECK_OUTPUT(t1+ t2, "420[sec]")
-        .CHECK_OUTPUT(t1+ t2, "7[min]")
-        .CHECK_OUTPUT(t1+ t2, "150[hour]")
+        .CHECK_OUTPUT(l1 + l2, "8[km]")
+        .CHECK_OUTPUT(l2 + l1, "8000[m]")
+        .CHECK_OUTPUT(l1 + l3, "4.00004[km]")
+        .CHECK_OUTPUT(l3 + l1, "400004[cm]")
+        .CHECK_OUTPUT(l2 + l3, "40000.04[m]")
+        .CHECK_OUTPUT(l3 + l2, "400004[cm]")
+        .CHECK_OUTPUT(t1 + t2, "420[sec]")
+        .CHECK_OUTPUT(t2 + t1, "7[min]")
+        .CHECK_OUTPUT(t1 + t3, "10860[sec]")
+        .CHECK_OUTPUT(t3 + t1, "3.01[hour]")
+        .CHECK_OUTPUT(t2 + t3, "186[min]")
+        .CHECK_OUTPUT(t3 + t2, "3.06[hour]")
+        
 
 
 
