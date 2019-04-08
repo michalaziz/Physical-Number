@@ -37,6 +37,9 @@ int main()
     PhysicalNumber w2(7, Unit::KG);
     PhysicalNumber w3(5, Unit::TON);
 
+    PhysicalNumber zero1(0, Unit::M);
+    PhysicalNumber zero2(0, Unit::KM);
+
     testcase
         .setname("Basic output")
         .CHECK_OUTPUT(a, "2[km]")
@@ -80,6 +83,8 @@ int main()
         .CHECK_OUTPUT(t3 + t2, "3.06[hour]")  // min to hour
         .CHECK_THROWS(t1 + l2)
         .CHECK_THROWS(w1 + l2)
+        .CHECK_OUTPUT(zero1+ zero2, "0[m]")
+        .CHECK_OUTPUT(zero2+ zero1, "0[km]")
 
         //- operator tests
         .CHECK_OUTPUT(l1 - l2, "0[km]")      //m to km
@@ -163,6 +168,11 @@ int main()
         .CHECK_OUTPUT((t3 -= t2), "2.54[hour]") //min to hour
         .CHECK_OUTPUT(t3, "2.54[hour]")
         .CHECK_THROWS((w2 -= t3))
+
+        //>> operator 
+        .CHECK_OK(istringstream("800[kg]") >> l1)
+        .CHECK_OUTPUT(l1, "800[kg]")
+
 
         
         .setname("...")
