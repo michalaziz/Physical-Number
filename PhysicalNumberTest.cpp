@@ -32,6 +32,7 @@ int main()
     PhysicalNumber t1(60, Unit::SEC);
     PhysicalNumber t2(6, Unit::MIN);
     PhysicalNumber t3(3, Unit::HOUR);
+    PhysicalNumber t4(1, Unit::MIN);
     PhysicalNumber w1(8, Unit::G);
     PhysicalNumber w2(7, Unit::KG);
     PhysicalNumber w3(5, Unit::TON);
@@ -64,19 +65,19 @@ int main()
         // YOUR TESTS - INSERT AS MANY AS YOU WANT
 
         //+ operator tests
-        .CHECK_OUTPUT(l1 + l2, "8[km]")//m to km 
+        .CHECK_OUTPUT(l1 + l2, "8[km]") //m to km
         .CHECK_OUTPUT(l1 + l1, "8[km]")
-        .CHECK_OUTPUT(l2 + l1, "8000[m]")//km to m 
-        .CHECK_OUTPUT(l1 + l3, "4.00004[km]")//cm to km
-        .CHECK_OUTPUT(l3 + l1, "400004[cm]")//km to cm 
-        .CHECK_OUTPUT(l2 + l3, "40000.04[m]")//cm to m 
-        .CHECK_OUTPUT(l3 + l2, "400004[cm]")//m to cm 
-        .CHECK_OUTPUT(t1 + t2, "420[sec]")// min to sec 
-        .CHECK_OUTPUT(t2 + t1, "7[min]")//sec to min 
-        .CHECK_OUTPUT(t1 + t3, "10860[sec]")// hour to sec 
-        .CHECK_OUTPUT(t3 + t1, "3.001[hour]")// sec to hour
-        .CHECK_OUTPUT(t2 + t3, "186[min]")// hour to min 
-        .CHECK_OUTPUT(t3 + t2, "3.06[hour]")// min to hour 
+        .CHECK_OUTPUT(l2 + l1, "8000[m]")     //km to m
+        .CHECK_OUTPUT(l1 + l3, "4.00004[km]") //cm to km
+        .CHECK_OUTPUT(l3 + l1, "400004[cm]")  //km to cm
+        .CHECK_OUTPUT(l2 + l3, "40000.04[m]") //cm to m
+        .CHECK_OUTPUT(l3 + l2, "400004[cm]")  //m to cm
+        .CHECK_OUTPUT(t1 + t2, "420[sec]")    // min to sec
+        .CHECK_OUTPUT(t2 + t1, "7[min]")      //sec to min
+        .CHECK_OUTPUT(t1 + t3, "10860[sec]")  // hour to sec
+        .CHECK_OUTPUT(t3 + t1, "3.001[hour]") // sec to hour
+        .CHECK_OUTPUT(t2 + t3, "186[min]")    // hour to min
+        .CHECK_OUTPUT(t3 + t2, "3.06[hour]")  // min to hour
         .CHECK_THROWS(t1 + l2)
         .CHECK_THROWS(w1 + l2)
 
@@ -84,28 +85,86 @@ int main()
         .CHECK_OUTPUT(l1 - l2, "0[km]")      //m to km
         .CHECK_OUTPUT(l2 - l1, "0[m]")       //km to m
         .CHECK_OUTPUT(l2 - l3, "3999.96[m]") //cm to m
-        .CHECK_THROWS(l3 - l2)               //m to cm
-        .CHECK_THROWS(l3 - l1)               //km to cm
         .CHECK_OUTPUT(l1 - l3, "3.99996")    //cm to km
         .CHECK_THROWS(t1 - l2)
         .CHECK_THROWS(w1 - l2)
 
+        //-() operator
+        .CHECK_OUTPUT(-l1, "-4[km]")
+        .CHECK_OUTPUT(-t1, "-60[sec]")
+        .CHECK_OUTPUT(-w1, "-8[g]")
+
+        //+() operator
+        .CHECK_OUTPUT(+w2, "7[kg]")
+        .CHECK_OUTPUT(+t2, "6[min]")
+        .CHECK_OUTPUT(+l2, "4000[m]")
+
+        //< operator
+        .CHECK_EQUAL(t1 < t2, true)
+        .CHECK_EQUAL(t3 < t2, false)
+        .CHECK_THROWS(t1 < w3)
+
+        //> operator
+        .CHECK_EQUAL(t1 > t2, false)
+        .CHECK_EQUAL(t3 > t2, true)
+        .CHECK_THROWS(t1 > w3)
+
+        //>= operator
+        .CHECK_EQUAL(t1 >= t2, false)
+        .CHECK_EQUAL(t3 >= t2, true)
+        .CHECK_EQUAL(t4 >= t1, true)
+        .CHECK_THROWS(t1 >= w3)
+
+        //<= operator
+        .CHECK_EQUAL(t1 <= t2, true)
+        .CHECK_EQUAL(t3 <= t2, false)
+        .CHECK_EQUAL(t4 <= t1, true)
+        .CHECK_THROWS(t1 <= w3)
+
+        //== operator
+        .CHECK_EQUAL(t1 == t2, false)
+        .CHECK_EQUAL(t3 == t2, false)
+        .CHECK_EQUAL(t4 == t1, true)
+        .CHECK_THROWS(t1 == w3)
+
+        //!= operator
+        .CHECK_EQUAL(t1 != t2, true)
+        .CHECK_EQUAL(t3 != t2, true)
+        .CHECK_EQUAL(t4 != t1, false)
+        .CHECK_THROWS(t1 != w3)
+
+        //++ operator
+        .CHECK_OUTPUT(t1++, "61[sec]")
+        .CHECK_OUTPUT(l1++, "5[km]")
+        .CHECK_OUTPUT(w1++, "9[g]")
+
+        //-- operatot
+        .CHECK_OUTPUT(t1, "59[sec]")
+        .CHECK_OUTPUT(l1, "3[km]")
+        .CHECK_OUTPUT(w1, "7[g]")
+
         //operator +=
-        .CHECK_OUTPUT((w2 += w1), "2.3[kg]")// g to kg 
-        .CHECK_OUTPUT((w3+= w1), "2.3[ton]")//g to ton 
-        .CHECK_OUTPUT((w1 += w2), "2.3[g]")//kg to g
-        .CHECK_OUTPUT((w3 += w2), "2.3[ton]")//kg to ton
-        .CHECK_OUTPUT((w2 += w3), "2.3[kg]")//ton to kg
-        .CHECK_OUTPUT((w1 += w3), "2.3[g]")//ton to g
+        .CHECK_OUTPUT((w2 += w1), "7.08[kg]") // g to kg
+        .CHECK_OUTPUT(w2, "7.08[kg]")
+        .CHECK_OUTPUT((w1 += w2), "7088[g]") //kg to g
+        .CHECK_OUTPUT(w1, "7088[g]")
+        .CHECK_OUTPUT((w2 += w3), "5007.08[kg]") //ton to kg
+        .CHECK_OUTPUT(w2, "5007.08[kg]")
         .CHECK_THROWS(w1 += l2)
         .CHECK_THROWS(t1 += w2)
         .CHECK_THROWS(l1 += w3)
         .CHECK_THROWS(w2 += t2)
-        
+
         //-= operator
+        .CHECK_OUTPUT((t2 -= t1), "5[min]") //sec to min
+        .CHECK_OUTPUT(t2, "2[min]")
+        .CHECK_OUTPUT((t3 -= t1), "2.59[hour]") //sec to hour
+        .CHECK_OUTPUT(t3, "2.59[hour]")
+        .CHECK_OUTPUT((t3 -= t2), "2.54[hour]") //min to hour
+        .CHECK_OUTPUT(t3, "2.54[hour]")
+        .CHECK_THROWS((w2 -= t3))
+
         
-
-
         .setname("...")
 
         .print(cout, /*show_grade=*/false);

@@ -21,7 +21,7 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& ph)
     return *this;
 }
 
-PhysicalNumber PhysicalNumber::operator+=(const PhysicalNumber& ph)
+PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& ph)
 {
     return *this;
 }
@@ -31,17 +31,17 @@ PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& ph)
     return *this;
 }
 
-PhysicalNumber PhysicalNumber::operator-=(const PhysicalNumber& ph)
+PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& ph)
 {
     return *this;
 }
 
-PhysicalNumber PhysicalNumber::operator-()
+PhysicalNumber& PhysicalNumber::operator-()
 {
     return *this;
 }
 
-PhysicalNumber PhysicalNumber::operator+()
+PhysicalNumber& PhysicalNumber::operator+()
 {
     return *this;
 }
@@ -76,12 +76,12 @@ const bool PhysicalNumber::operator!=(const PhysicalNumber& ph)
     return 0;
 }
 
-PhysicalNumber PhysicalNumber::operator++(int temp)
+PhysicalNumber& PhysicalNumber::operator++(int temp)
 {
     return *this;
 }
 
-PhysicalNumber PhysicalNumber::operator--(int temp)
+PhysicalNumber& PhysicalNumber::operator--(int temp)
 {
     return *this;
 }
@@ -96,14 +96,6 @@ istream& operator>>(istream &in, PhysicalNumber &x)
     in>>x.num;
     return in;
 }
-
-
-
-
-
-
-
-
 
 }
 
