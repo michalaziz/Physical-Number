@@ -3,6 +3,7 @@
 using namespace std;
 namespace ariel
 {
+string type[9]={"cm","m","km","sec","min","hour","g","kg","ton"};
 //deafult ctor
 PhysicalNumber::PhysicalNumber(){};
 //ctor
@@ -11,10 +12,7 @@ PhysicalNumber::PhysicalNumber(double n, int un)
     num = n;
     u = un;
 }
-//dtor
-PhysicalNumber::~PhysicalNumber()
-{
-}
+
 
 PhysicalNumber PhysicalNumber::convert(PhysicalNumber &n2)
 {
@@ -288,14 +286,12 @@ PhysicalNumber &PhysicalNumber::operator--(int temp)
     return *this;
 }
 
-ostream &operator<<(ostream &out, const PhysicalNumber &x)
+ostream &operator<<(ostream &out, const PhysicalNumber &p)
 {
-    out << x.num << endl;
-    return out;
+    return out << p.num <<"["<<type[p.u]<<"]"<<endl;
 }
 istream &operator>>(istream &in, PhysicalNumber &x)
 {
-    in >> x.num;
     return in;
 }
 
