@@ -14,13 +14,13 @@ class PhysicalNumber
   public:
     PhysicalNumber();//deafult ctor                                  
     PhysicalNumber(double, int);//ctor
-    PhysicalNumber convert (PhysicalNumber&);                               
+    PhysicalNumber convert (PhysicalNumber&);                             
     PhysicalNumber operator+(const PhysicalNumber &);  //physicalNumber+physicalNumber
     PhysicalNumber& operator+=(const PhysicalNumber &); //physicalNumber=physicalNumber+physicalNumber
     PhysicalNumber operator-(const PhysicalNumber &);  //physicalNumber-physicalNumber
     PhysicalNumber& operator-=(const PhysicalNumber &); //physicalNumber=physicalNumber-physicalNumber
-    PhysicalNumber& operator+();//+(physicalNumber)
-    PhysicalNumber& operator-();//-(physicalNumber) 
+    PhysicalNumber operator+();//+(physicalNumber)
+    PhysicalNumber operator-();//-(physicalNumber) 
 
     const bool operator<(const PhysicalNumber &);//PhysicalNumber<PhysicalNumber
     const bool operator>(const PhysicalNumber &);//PhysicalNumber>PhysicalNumber
