@@ -41,5 +41,7 @@ int main() {
   } catch (...) {
     cout << "Unexpected exception!" << endl;
   }
+
+  cout<<Unit::M<<endl;
   return 100;
 }

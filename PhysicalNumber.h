@@ -14,7 +14,9 @@ class PhysicalNumber
   public:
     PhysicalNumber();//deafult ctor                                  
     PhysicalNumber(double, int);//ctor                      
-    ~PhysicalNumber();//dtor                                 
+    ~PhysicalNumber();//dtor  
+    void newPhysicalNumber(PhysicalNumber);
+    PhysicalNumber convert (PhysicalNumber&);                               
     PhysicalNumber operator+(const PhysicalNumber &);  //physicalNumber+physicalNumber
     PhysicalNumber& operator+=(const PhysicalNumber &); //physicalNumber=physicalNumber+physicalNumber
     PhysicalNumber operator-(const PhysicalNumber &);  //physicalNumber-physicalNumber
