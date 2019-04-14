@@ -21,7 +21,7 @@ class PhysicalNumber
     PhysicalNumber& operator-=(const PhysicalNumber &); //physicalNumber=physicalNumber-physicalNumber
     PhysicalNumber operator+();//+(physicalNumber)
     PhysicalNumber operator-();//-(physicalNumber) 
-    PhysicalNumber & operator =(PhysicalNumber&);
+    PhysicalNumber & operator =(const PhysicalNumber&);
 
     const bool operator<(const PhysicalNumber &);//PhysicalNumber<PhysicalNumber
     const bool operator>(const PhysicalNumber &);//PhysicalNumber>PhysicalNumber

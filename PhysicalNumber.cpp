@@ -216,7 +216,7 @@ PhysicalNumber PhysicalNumber::operator+()
     return temp;
 }
 
-PhysicalNumber &PhysicalNumber::operator=(PhysicalNumber& n2 )
+PhysicalNumber &PhysicalNumber::operator=(const PhysicalNumber& n2 )
 {
     num= n2.num;
     u=n2.u;
