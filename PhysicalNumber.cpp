@@ -282,13 +282,13 @@ const bool PhysicalNumber::operator!=(const PhysicalNumber &n2)
     return false;
 }
 
-PhysicalNumber &PhysicalNumber::operator++(int temp)
+PhysicalNumber &PhysicalNumber::operator++()
 {
     num = num + 1;
     return *this;
 }
 
-PhysicalNumber &PhysicalNumber::operator--(int temp)
+PhysicalNumber &PhysicalNumber::operator--()
 {
     num = num - 1;
     return *this;

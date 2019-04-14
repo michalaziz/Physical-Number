@@ -30,8 +30,8 @@ class PhysicalNumber
     const bool operator==(const PhysicalNumber &);//PhysicalNumber==PhysicalNumber
     const bool operator!=(const PhysicalNumber &);//PhysicalNumber!=PhysicalNumber
 
-    PhysicalNumber& operator++(int);//PhysicalNumber++
-    PhysicalNumber& operator--(int);//PhysicalNumber--
+    PhysicalNumber& operator++();//PhysicalNumber++
+    PhysicalNumber& operator--();//PhysicalNumber--
     friend ostream& operator<<(ostream &out, const PhysicalNumber& x);//cout
     friend istream& operator>>(istream &in,  PhysicalNumber &x);//cin
 };
