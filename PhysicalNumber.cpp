@@ -151,6 +151,7 @@ PhysicalNumber PhysicalNumber::convert(PhysicalNumber &n2)
         throw "error";
     }
     }
+    return n2;
 }
 
 
