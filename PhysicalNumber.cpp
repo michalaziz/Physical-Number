@@ -294,6 +294,19 @@ PhysicalNumber &PhysicalNumber::operator--()
     return *this;
 }
 
+PhysicalNumber &PhysicalNumber::operator++(int temp)
+{
+    num = num + 1;
+    return *this;
+}
+
+PhysicalNumber &PhysicalNumber::operator--(int temp)
+{
+    num = num - 1;
+    return *this;
+}
+
+
 
 
 
