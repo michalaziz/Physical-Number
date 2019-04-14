@@ -31,8 +31,8 @@ class PhysicalNumber
     const bool operator==(const PhysicalNumber &);//PhysicalNumber==PhysicalNumber
     const bool operator!=(const PhysicalNumber &);//PhysicalNumber!=PhysicalNumber
 
-    PhysicalNumber& operator++(int);//PhysicalNumber++
-    PhysicalNumber& operator--(int);//PhysicalNumber--
+    PhysicalNumber operator++(int);//PhysicalNumber++
+    PhysicalNumber operator--(int);//PhysicalNumber--
     PhysicalNumber &operator++(); //++PhysicalNumber
     PhysicalNumber &operator--(); //--PhysicalNumber
 
