@@ -154,8 +154,6 @@ PhysicalNumber PhysicalNumber::convert(PhysicalNumber &n2)
     return n2;
 }
 
-
-
 //+
 
 PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &n2)
@@ -211,17 +209,17 @@ PhysicalNumber PhysicalNumber::operator-()
 PhysicalNumber PhysicalNumber::operator+()
 {
     PhysicalNumber temp;
-    temp.num= num;
+    temp.num = num;
     if (num < 0)
         temp.num = 0 - temp.num;
     temp.u = u;
     return temp;
 }
 
-PhysicalNumber &PhysicalNumber::operator=(const PhysicalNumber& n2 )
+PhysicalNumber &PhysicalNumber::operator=(const PhysicalNumber &n2)
 {
-    num= n2.num;
-    u=n2.u;
+    num = n2.num;
+    u = n2.u;
     return *this;
 }
 
@@ -291,36 +289,31 @@ const bool PhysicalNumber::operator!=(const PhysicalNumber &n2)
     return false;
 }
 
-PhysicalNumber &PhysicalNumber::operator++()//prefix
+PhysicalNumber &PhysicalNumber::operator++() //prefix
 {
     num = num + 1;
     return *this;
 }
 
-PhysicalNumber &PhysicalNumber::operator--()//prefix
+PhysicalNumber &PhysicalNumber::operator--() //prefix
 {
     num = num - 1;
     return *this;
 }
 
-PhysicalNumber PhysicalNumber::operator++(int notused)//postfix
+PhysicalNumber PhysicalNumber::operator++(int notused) //postfix
 {
     PhysicalNumber temp(num, u);
     num++;
     return temp;
 }
 
-PhysicalNumber PhysicalNumber::operator--(int notused)//postfix
+PhysicalNumber PhysicalNumber::operator--(int notused) //postfix
 {
     PhysicalNumber temp(num, u);
     num--;
     return temp;
 }
-
-
-
-
-
 
 ostream &operator<<(ostream &out, const PhysicalNumber &p)
 {
@@ -328,38 +321,42 @@ ostream &operator<<(ostream &out, const PhysicalNumber &p)
 }
 istream &operator>>(istream &in, PhysicalNumber &p)
 {
-    string s;
+
+    string s, number, typeCut;
     in >> s;
+    number = s.substr(0, s.find('['));
+    typeCut = s.substr(s.find('[')+1, s.length() - s.find("[") - 2);
+
     string type[9] = {"cm", "m", "km", "sec", "min", "hour", "g", "kg", "ton"};
-    int i = 0, counter = 0;
-    while (s[i])
+    int count = 0,index;
+    for (size_t i = 0; i < 9; i++)
     {
-        if (s[i] == '[')
-            break;
-        i++;
+        if (type[i] == typeCut)
+        {
+            count++;
+            index=i;
+        }  
     }
-    if (s[i] != '[')
-        throw "error";
-    string temp = s.substr(0, i);
-    p.num = stod(temp);
-    i += 1;
-    while (s[i])
+  
+        
+    int count2 = 0;
+    for (size_t i = 0; i < number.length(); i++)
     {
-        if (s[i] == ']')
-            break;
-        counter++;
-        i++;
+        if (isdigit(number.at(i)) || (number.at(i) == '.'))
+        {
+            count2++;
+        }
     }
-    if (s[i] != ']')
-        throw "error";
-    temp = s.substr(i - counter, counter);
-    i = counter = 0;
-    while (temp != type[i])
+    if (count2 != number.length()||count == 0||s.find("[")==string::npos||s.find("]")==string::npos)
     {
-        counter++;
-        i++;
+        cout<<typeCut<<" "<<number<<endl;
+        return in;
     }
-    p.u = counter;
+    else
+    {
+         p.u = (Unit)index;
+        p.num = stod(number);
+    }
     return in;
 }
 
