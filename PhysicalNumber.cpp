@@ -206,7 +206,7 @@ PhysicalNumber &PhysicalNumber::operator-=(const PhysicalNumber &n2)
 PhysicalNumber PhysicalNumber::operator-()
 {
     //-(this)
-    PhysicalNumber temp; //we dont chang the original varibal
+    PhysicalNumber temp;//we dont chang the original varibal
     temp.num = -(num);   //-()
     temp.u = u;
     return temp;
