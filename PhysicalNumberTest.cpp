@@ -27,6 +27,7 @@ int main()
     PhysicalNumber c(2, Unit::HOUR);
     PhysicalNumber d(30, Unit::MIN);
 
+   // my physislNumber 
     PhysicalNumber l1(4, Unit::KM);
     PhysicalNumber l2(4000, Unit::M);
     PhysicalNumber l3(4, Unit::CM);
@@ -95,62 +96,62 @@ int main()
         .CHECK_OUTPUT(l2 - l1, "0[m]")       //km to m
         .CHECK_OUTPUT(l2 - l3, "3999.96[m]") //cm to m
         .CHECK_OUTPUT(l1 - l3, "3.99996[km]")    //cm to km
-        .CHECK_THROWS(t1 - l2)
-        .CHECK_THROWS(w1 - l2)
+        .CHECK_THROWS(t1 - l2)//different types 
+        .CHECK_THROWS(w1 - l2)//different types 
 
         // //-() operator
-        .CHECK_OUTPUT(-l1, "-4[km]")
-        .CHECK_OUTPUT(-t1, "-60[sec]")
-        .CHECK_OUTPUT(-w1, "-8[g]")
-        .CHECK_OUTPUT(-minus, "2[m]")
+        .CHECK_OUTPUT(-l1, "-4[km]")//chang + to -
+        .CHECK_OUTPUT(-t1, "-60[sec]")//chang + to -
+        .CHECK_OUTPUT(-w1, "-8[g]")//chang + to -
+        .CHECK_OUTPUT(-minus, "2[m]")//chang -- to +
 
         // //+() operator
-        .CHECK_OUTPUT(+w2, "7[kg]")
-        .CHECK_OUTPUT(+t2, "6[min]")
-        .CHECK_OUTPUT(+l2, "4000[m]")
-        .CHECK_OUTPUT(+minus, "2[m]")
+        .CHECK_OUTPUT(+w2, "7[kg]")//no chang
+        .CHECK_OUTPUT(+t2, "6[min]")//no chang
+        .CHECK_OUTPUT(+l2, "4000[m]")//no chang
+        .CHECK_OUTPUT(+minus, "2[m]")//chang - to +
 
-        // //< operator
+        //< operator
         .CHECK_EQUAL(t1 < t2, true)
         .CHECK_EQUAL(t3 < t2, false)
-        .CHECK_THROWS(t1 < w3)
+        .CHECK_THROWS(t1 < w3)//different types
 
         // //> operator
         .CHECK_EQUAL(t1 > t2, false)
         .CHECK_EQUAL(t3 > t2, true)
-        .CHECK_THROWS(t1 > w3)
+        .CHECK_THROWS(t1 > w3)//different types
 
         // //>= operator
         .CHECK_EQUAL(t1 >= t2, false)
         .CHECK_EQUAL(t3 >= t2, true)
         .CHECK_EQUAL(t4 >= t1, true)
-        .CHECK_THROWS(t1 >= w3)
+        .CHECK_THROWS(t1 >= w3)//different types
 
         // //<= operator
         .CHECK_EQUAL(t1 <= t2, true)
         .CHECK_EQUAL(t3 <= t2, false)
         .CHECK_EQUAL(t4 <= t1, true)
-        .CHECK_THROWS(t1 <= w3)
+        .CHECK_THROWS(t1 <= w3)//different types
 
         // //== operator
         .CHECK_EQUAL(t1 == t2, false)
         .CHECK_EQUAL(t3 == t2, false)
         .CHECK_EQUAL(t4 == t1, true)
-        .CHECK_THROWS(t1 == w3)
+        .CHECK_THROWS(t1 == w3)//different types
 
         // //!= operator
         .CHECK_EQUAL(t1 != t2, true)
         .CHECK_EQUAL(t3 != t2, true)
         .CHECK_EQUAL(t4 != t1, false)
-        .CHECK_THROWS(t1 != w3)
+        .CHECK_THROWS(t1 != w3)//different types
 
         // //++ operator
-        .CHECK_OUTPUT(t1++, "60[sec]")
+        .CHECK_OUTPUT(t1++, "60[sec]")// 59++=60
         .CHECK_OUTPUT(l1++, "4[km]")
         .CHECK_OUTPUT(w1++, "8[g]")
 
         // //-- operatot
-        .CHECK_OUTPUT(t1--, "61[sec]")
+        .CHECK_OUTPUT(t1--, "61[sec]")//61--=60
         .CHECK_OUTPUT(l1--, "5[km]")
         .CHECK_OUTPUT(w1--, "9[g]")
 
@@ -161,7 +162,7 @@ int main()
         .CHECK_OUTPUT(w1, "7016[g]")
         // .CHECK_OUTPUT((w2 += w3), "5007.008[kg]") //ton to kg
         // .CHECK_OUTPUT(w2, "5007.008[kg]")
-        .CHECK_THROWS(w1 += l2)
+        .CHECK_THROWS(w1 += l2)//different types
         .CHECK_THROWS(t1 += w2)
         .CHECK_THROWS(l1 += w3)
         .CHECK_THROWS(w2 += t2)
